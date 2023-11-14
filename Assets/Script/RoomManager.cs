@@ -44,4 +44,55 @@ public class RoomManager : MonoBehaviourPunCallbacks
             room.GetComponent<Infomation>().SetInfo(info.Name, info.PlayerCount, info.MaxPlayers);
         }
     }
+
+    public void OnClickCreateRoom()
+    {
+        // 룸 옵션을 설정한다.
+        RoomOptions Room = new RoomOptions();
+
+        // 최대 접속자의 수를 설정한다.
+        Room.MaxPlayers = byte.Parse(RoomPerson.text);
+
+        // 룸의 오픈 여부를 설정한다.
+        Room.IsOpen = true;
+
+        // 로비에서 룸 목록을 노출시킬지 설정한다.
+        Room.IsVisible = true;
+
+        // 룸을 생성하는 함수
+        PhotonNetwork.CreateRoom(RoomName.text, Room);
+    }
+    public void AllDeleteRoom()
+    {
+        // transform 오브젝트에 있는 하위 오브젝트에 접근하여 전체 삭제를 시도한다.
+        foreach(Transform trans in RoomContent)
+        {
+            // Transform이 가지고 있는 게임 오브젝트를 삭제한다.
+            Destroy(trans.gameObject);
+        }
+    }
+
+    // 해당 로비에 방 목록의 변경사항이 있으면 호출(추가, 삭제, 참가)
+    public override void OnRoomListUpdate(List<RoomInfo> roomList)
+    {
+        AllDeleteRoom();
+        UpdateRoom(roomList);
+        CreateRoomObject();
+    }
+
+    void UpdateRoom(List<RoomInfo>roomList)
+    {
+        for(int i = 0; i < roomList.Count; i++)
+        {
+            if (RoomCatalog.ContainsKey(roomList[i].Name))
+            {
+                if (roomList[i].RemovedFromList)
+                {
+                    RoomCatalog.Remove(roomList[i].Name);
+                    continue;
+                }
+            }
+            RoomCatalog[roomList[i].Name] = roomList[i];
+        }
+    }
 }
