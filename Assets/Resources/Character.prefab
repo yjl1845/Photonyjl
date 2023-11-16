@@ -3098,10 +3098,11 @@ MonoBehaviour:
   Group: 0
   prefixField: -1
   Synchronization: 3
-  OwnershipTransfer: 0
+  OwnershipTransfer: 1
   observableSearch: 2
   ObservedComponents:
   - {fileID: 3057942547230821345}
+  - {fileID: 6446353819857587249}
   - {fileID: 4825107049170876825}
   sceneViewId: 0
   InstantiationId: 0
@@ -3118,6 +3119,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa3026142ef19e94aa931b5db824803a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nickName: {fileID: 3843995113550613305}
+  score: 0
+  mouseX: 100
+  rotateSpeed: 50
+  speed: 5
+  direction: {x: 0, y: 0, z: 0}
+  temporaryCamera: {fileID: 330364671084106993}
 --- !u!54 &-943467899392330342
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3166,9 +3174,9 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.5
-  m_Height: 1
+  m_Height: 2
   m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!114 &4825107049170876825
 MonoBehaviour:
   m_ObjectHideFlags: 0
